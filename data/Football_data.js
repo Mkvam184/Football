@@ -80,40 +80,38 @@ async function syncFootballData() {
             }
 
             let currentTeams = allLeagues[league.key]?.teams || [];
-            if (currentTeams.length < 8) {
-                console.log(`🔍 Phát hiện ${league.name} thiếu danh sách đội. Đang tải Bảng Xếp Hạng...`);
-                await sleep(6500);
+            console.log(`🔍 Phát hiện ${league.name} thiếu danh sách đội. Đang tải Bảng Xếp Hạng...`);
+            await sleep(6500);
 
-                const standingsUrl = `https://api.football-data.org/v4/competitions/${league.code}/standings`;
-                const resStandings = await fetch(standingsUrl, {
-                    headers: { 'X-Auth-Token': API_KEY }
-                });
+            const standingsUrl = `https://api.football-data.org/v4/competitions/${league.code}/standings`;
+            const resStandings = await fetch(standingsUrl, {
+                headers: { 'X-Auth-Token': API_KEY }
+            });
 
-                if (resStandings.ok) {
-                    const dataStandings = await resStandings.json();
-                    let combinedTable = [];
-                    if (Array.isArray(dataStandings.standings)) {
-                        dataStandings.standings.forEach(s => {
-                            if (Array.isArray(s.table)) {
-                                combinedTable = combinedTable.concat(s.table);
-                            }
-                        });
-                    }
+            if (resStandings.ok) {
+                const dataStandings = await resStandings.json();
+                let combinedTable = [];
+                if (Array.isArray(dataStandings.standings)) {
+                    dataStandings.standings.forEach(s => {
+                        if (Array.isArray(s.table)) {
+                            combinedTable = combinedTable.concat(s.table);
+                        }
+                    });
+                }
 
-                    if (combinedTable.length > 0) {
-                        currentTeams = combinedTable.map(item => ({
-                            rank: item.position,
-                            team: item.team.name,
-                            icon: item.team.crest || "",
-                            p: item.playedGames,
-                            w: item.won,
-                            d: item.draw,
-                            l: item.lost,
-                            gd: item.goalDifference > 0 ? `+${item.goalDifference}` : `${item.goalDifference}`,
-                            pts: item.points,
-                            group: item.group || ""
-                        }));
-                    }
+                if (combinedTable.length > 0) {
+                    currentTeams = combinedTable.map(item => ({
+                        rank: item.position,
+                        team: item.team.name,
+                        icon: item.team.crest || "",
+                        p: item.playedGames,
+                        w: item.won,
+                        d: item.draw,
+                        l: item.lost,
+                        gd: item.goalDifference > 0 ? `+${item.goalDifference}` : `${item.goalDifference}`,
+                        pts: item.points,
+                        group: item.group || ""
+                    }));
                 }
             }
 
@@ -141,4 +139,5 @@ async function syncFootballData() {
 (async () => {
     await syncFootballData();
     console.log("✅ Hoàn tất một lần đồng bộ dữ liệu. GitHub Actions sẽ chạy lại theo lịch 15 phút.");
+    process.exit(0)
 })();
