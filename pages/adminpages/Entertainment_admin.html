@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Giải Trí - Admin</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen font-sans antialiased selection:bg-[#FF4500] selection:text-white m-0 p-0">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- HEADER TRANG ADMIN -->
+    <div class="w-full bg-[#080808] border-b border-white/10 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <span class="px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-widest bg-red-500/20 text-red-400 border border-red-500/30 rounded-full shadow-sm">
+                    Trang Quản Trị Hệ Thống
+                </span>
+                <h1 class="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight flex items-center gap-3">
+                    <span>⚙️</span> QUẢN LÝ NỘI DUNG GIẢI TRÍ
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">Tùy chỉnh các thẻ giao diện khớp hoàn toàn với góc nhìn của User</p>
+            </div>
+
+            <button id="btn-open-create" class="px-5 py-3 bg-[#FF4500] hover:bg-[#ff5714] text-white font-black text-xs rounded-2xl shadow-lg transition-all flex items-center gap-2 self-start md:self-auto cursor-pointer active:scale-95">
+                <span>➕</span> THÊM MỤC GIẢI TRÍ MỚI
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER - 3 DÃY MÀU NỐI TIẾP -->
+    <main class="w-full flex flex-col m-0 p-0">
+
+        <!-- DÃY 1: RED ZONE - KÊNH YOUTUBE -->
+        <section class="w-full bg-gradient-to-b from-[#3B070C] via-[#260407] to-[#1A0204] border-b border-red-500/20 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-red-400 block mb-1">Official Channels Zone</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-red-500">🔴</span> Quản Lý Kênh YouTube
+                        </h2>
+                    </div>
+                </div>
+                <div id="admin-channels-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- DÃY 2: PURPLE ZONE - ÂM NHẠC WORLD CUP -->
+        <section class="w-full bg-gradient-to-b from-[#250942] via-[#17052C] to-[#0D021C] border-b border-purple-500/20 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-purple-300 block mb-1">Soundtracks & Music Zone</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-purple-400">🎵</span> Quản Lý Âm Nhạc World Cup
+                        </h2>
+                    </div>
+                </div>
+                <div id="admin-music-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- DÃY 3: CYAN-GREEN ZONE - GAMING CENTER -->
+        <section class="w-full bg-gradient-to-b from-[#063323] via-[#031C13] to-[#010D09] py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-emerald-400 block mb-1">Gaming Center Zone</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span>🕹️</span> Quản Lý Games Bóng Đá
+                        </h2>
+                    </div>
+                </div>
+                <div id="admin-gaming-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FORM MODAL HIỆU ỨNG -->
+    <div id="entertainment-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 ease-out">
+        <div id="modal-card" class="bg-[#121212] border border-white/20 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative transform scale-95 opacity-0 transition-all duration-300 ease-out">
+            
+            <button id="btn-close-modal" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-400 hover:text-white text-base transition-all">✕</button>
+            
+            <h3 id="modal-form-title" class="text-xl font-black text-white mb-6 flex items-center gap-2">
+                <span>📝</span> Thêm Mục Giải Trí Mới
+            </h3>
+            
+            <form id="entertainment-form" class="space-y-4">
+                <input type="hidden" id="item-id">
+                
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Phân Khu / Dãy Màu</label>
+                    <select id="item-type" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]">
+                        <option value="channel" class="bg-black">🔴 Dãy Đỏ - Kênh YouTube</option>
+                        <option value="music" class="bg-black">🎵 Dãy Tím - Âm Nhạc World Cup</option>
+                        <option value="gaming" class="bg-black">🕹️ Dãy Xanh - Games Bóng Đá</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">Tiêu Đề (Title)</label>
+                        <input type="text" id="item-title" required class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]" placeholder="VD: UR Cristiano">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">Phụ Đề (Subtitle)</label>
+                        <input type="text" id="item-subtitle" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]" placeholder="VD: @Cristiano">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1.5">Hình Ảnh / Icon Avatar</label>
+                        
+                        <!-- Tab chuyển đổi phương thức -->
+                        <div class="flex gap-2 mb-2 p-1 bg-white/5 rounded-xl border border-white/10">
+                            <button type="button" id="tab-mode-file" class="flex-1 py-1.5 text-[11px] font-bold rounded-lg bg-[#FF4500] text-white transition-all cursor-pointer">
+                                📁 Tải tệp lên
+                            </button>
+                            <button type="button" id="tab-mode-url" class="flex-1 py-1.5 text-[11px] font-bold rounded-lg text-gray-400 hover:text-white transition-all cursor-pointer">
+                                🔗 Link URL / Emoji
+                            </button>
+                        </div>
+
+                        <!-- O1: Input File Ảnh -->
+                        <div id="input-file-container" class="space-y-2">
+                            <input type="file" id="item-image-file" accept="image/*" class="w-full text-xs text-gray-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-white/10 file:text-white hover:file:bg-white/20 cursor-pointer">
+                            <p class="text-[10px] text-gray-400">Hỗ trợ JPG, PNG, WEBP (Tự động nén tối ưu).</p>
+                        </div>
+
+                        <!-- O2: Input Link URL / Emoji (Ẩn mặc định) -->
+                        <div id="input-url-container" class="hidden">
+                            <input type="text" id="item-image-url" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]" placeholder="Dán link ảnh https://... hoặc nhập Emoji 🐐">
+                        </div>
+
+                        <!-- Khung xem trước ảnh (Preview) -->
+                        <div id="image-preview-container" class="mt-2 hidden flex items-center gap-3 p-2 bg-white/5 border border-white/10 rounded-xl">
+                            <img id="image-preview" src="" class="w-10 h-10 object-cover rounded-lg border border-white/20">
+                            <span class="text-[11px] text-emerald-400 font-bold">✓ Đã chọn ảnh xem trước</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">Thẻ Nhãn (Tag Badge)</label>
+                        <input type="text" id="item-tag" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]" placeholder="VD: 65M+ Sub">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Mô Tả / Nội Dung</label>
+                    <textarea id="item-desc" rows="3" required class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]" placeholder="Mô tả ngắn gọn về kênh / bài hát / game..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Đường Dẫn Link (URL)</label>
+                    <input type="url" id="item-link" required class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-[#FF4500]" placeholder="https://youtube.com/...">
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
+                    <button type="button" id="btn-cancel" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl transition-all cursor-pointer">Hủy</button>
+                    <button type="submit" class="px-5 py-2.5 bg-[#FF4500] hover:bg-[#ff5714] text-white font-black text-xs rounded-xl shadow-lg transition-all cursor-pointer">Lưu Thay Đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../js/adminjs/Entertainment_admin.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+</body>
+</html>

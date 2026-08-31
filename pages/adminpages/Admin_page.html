@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Trị - Football Hub Admin</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/navbar.css">
+
+    <link rel="stylesheet" href="../../css/Admin_page.css">
+</head>
+<body class="bg-[#051C0C] text-white font-sans min-h-screen flex flex-col selection:bg-[#FF4500] selection:text-white">
+    
+    <!-- NAVBAR COMPONENT -->
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- BANNER ADMIN & THỐNG KÊ NHANH (HERO SECTION) -->
+    <section class="py-6 bg-gradient-to-b from-[#0D3B1B] to-[#051C0C] border-b border-[#166534]/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-[#FF4500] animate-ping"></span>
+                        <h1 class="text-2xl font-black tracking-wider uppercase text-white">Bảng Quản Trị Hệ Thống</h1>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">Quản lý người dùng, bài viết tin tức và lịch thi đấu bóng đá.</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="Blog_admin.html" id="btn-add-news" class="px-4 py-2 bg-[#FF4500] hover:bg-[#ff5714] text-white rounded-xl text-sm font-bold shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-2 inline-flex">
+                        <span>➕</span> Thêm Tin Tức
+                    </a>
+                    <a href="Tournament_admin.html" id="btn-add-match" class="px-4 py-2 bg-[#134E22] hover:bg-[#1a662e] border border-[#1e7e34] text-white rounded-xl text-sm font-bold shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-2 inline-flex">
+                        <span>⚽</span> Thêm Trận Đấu
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARDS THỐNG KÊ (4 Ô SỐ LIỆU) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Stat 1 -->
+                <div class="bg-[#0D3B1B] border border-[#166534] hover:border-[#FF4500] rounded-2xl p-4 shadow-xl transition-all duration-300">
+                    <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                        <span>Tổng Người Dùng</span>
+                        <span class="text-emerald-400 font-bold">👥 Users</span>
+                    </div>
+                    <div class="text-3xl font-black text-white" id="stat-total-users">--</div>
+                    <p class="text-[10px] text-gray-400 mt-2">Tài khoản đã đăng ký</p>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="bg-[#0D3B1B] border border-[#166534] hover:border-[#FF4500] rounded-2xl p-4 shadow-xl transition-all duration-300">
+                    <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                        <span>Tổng Bài Viết</span>
+                        <span class="text-blue-400 font-bold">📰 News</span>
+                    </div>
+                    <div class="text-3xl font-black text-[#FF4500]" id="stat-total-posts">--</div>
+                    <p class="text-[10px] text-gray-400 mt-2">Tin tức & Bình luận</p>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="bg-[#0D3B1B] border border-[#166534] hover:border-[#FF4500] rounded-2xl p-4 shadow-xl transition-all duration-300">
+                    <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                        <span>Trận Đấu Cập Nhật</span>
+                        <span class="text-yellow-400 font-bold">⚽ Matches</span>
+                    </div>
+                    <div class="text-3xl font-black text-yellow-400" id="stat-total-matches">--</div>
+                    <p class="text-[10px] text-gray-400 mt-2">Đang & Sắp diễn ra</p>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="bg-[#0D3B1B] border border-[#166534] hover:border-[#FF4500] rounded-2xl p-4 shadow-xl transition-all duration-300">
+                    <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                        <span>Báo Cáo Vi Phạm</span>
+                        <span class="text-red-400 font-bold">⚠️ Reports</span>
+                    </div>
+                    <div class="text-3xl font-black text-red-400" id="stat-total-reports">0</div>
+                    <p class="text-[10px] text-gray-400 mt-2">Cần xử lý ngay</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THÂN TRANG QUẢN TRỊ -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- CỘT TRÁI: THÔNG TIN ADMIN & TÁC VỤ NHANH -->
+        <div class="lg:col-span-1 space-y-6">
+            <!-- Thẻ Hồ sơ Admin -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-[#FF4500]/10 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-[#FF4500] to-yellow-400 p-1 mb-4 shadow-lg">
+                        <div class="w-full h-full bg-[#0D3B1B] rounded-full flex items-center justify-center font-black text-3xl text-white">
+                            <span id="admin-avatar">A</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <h2 id="admin-display-name" class="text-2xl font-black text-white">Đang tải...</h2>
+                        <span class="bg-yellow-500 text-black text-[10px] font-black px-1.5 py-0.5 rounded">ADMIN</span>
+                    </div>
+                    <p id="admin-tag" class="text-xs text-[#FF4500] font-semibold mt-1">@admin</p>
+                    
+                    <div class="mt-4 w-full border-t border-[#166534] pt-4 space-y-3 text-left text-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Quyền hạn:</span>
+                            <span class="font-bold text-yellow-400">Admin</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Phiên làm việc:</span>
+                            <span class="font-medium text-emerald-400">Đang hoạt động</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tác vụ nhanh Admin -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <h3 class="text-md font-bold mb-4 text-gray-200 uppercase tracking-wide flex items-center gap-2">
+                    ⚙️ Tác Vụ Hệ Thống
+                </h3>
+                <div class="space-y-2">
+                    <button id="btn-change-password" class="w-full text-left py-2.5 px-4 rounded-xl bg-[#134E22] border border-[#1e7e34] hover:border-[#FF4500] text-sm font-semibold transition-all flex items-center justify-between">
+                        <span>🔒 Đổi Mật Khẩu Admin</span>
+                        <span>➔</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-gray-200 uppercase tracking-wide flex items-center gap-2">
+                        📜 Lịch Sử Hệ Thống
+                    </h3>
+                    <span class="text-xs text-gray-400">Ghi nhận các tác vụ Admin</span>
+                </div>
+                
+                <div class="space-y-3 max-h-[300px] overflow-y-auto pr-1 scroll-smooth" id="admin-history-list">
+                    <!-- Đang tải dữ liệu... -->
+                    <p class="text-xs text-gray-400 text-center py-4">Đang tải nhật ký lịch sử...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CỘT PHẢI: QUẢN LÝ TÀI KHOẢN & DỮ LIỆU -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- BẢNG QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-gray-200 uppercase tracking-wide flex items-center gap-2">
+                        👥 Danh Sách Tài Khoản
+                    </h3>
+                    <input type="text" id="search-user" placeholder="Tìm người dùng..." class="bg-[#051C0C] border border-[#166534] text-xs text-white px-3 py-1.5 rounded-lg focus:outline-none focus:border-[#FF4500]">
+                </div>
+
+                <div class="overflow-x-auto max-h-[250px] overflow-y-auto pr-1 scroll-smooth">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-[#166534] text-xs text-gray-400 uppercase">
+                                <th class="py-3 px-2">User</th>
+                                <th class="py-3 px-2">Role</th>
+                                <th class="py-3 px-2 text-center">Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body" class="text-sm divide-y divide-[#166534]/50">
+                            <!-- Dữ liệu mẫu sẽ được thay bằng JavaScript từ Firebase -->
+                            <tr>
+                                <td class="py-3 px-2 flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-full bg-[#FF4500] flex items-center justify-center font-black text-xs text-white">U</div>
+                                    <div>
+                                        <div class="font-bold">Họ và tên: </div>
+                                        <div class="text-[10px] text-gray-400">ID: </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-2">
+                                    <span class="bg-green-900/50 text-green-400 text-xs px-2 py-0.5 rounded border border-green-700/50">User</span>
+                                </td>
+                                <td class="py-3 px-2 text-center">
+                                    <button class="text-xs bg-yellow-600 hover:bg-yellow-500 text-white px-2 py-1 rounded mr-1 transition-colors">Sửa</button>
+                                    <button class="text-xs bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded transition-colors">Xóa</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BẢNG TIN TỨC GẦN ĐÂY -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-bold mb-4 text-gray-200 uppercase tracking-wide">
+                    📰 Bài Viết Quản Lý
+                </h3>
+                <div class="space-y-3 max-h-[380px] overflow-y-auto pr-1 scroll-smooth" id="admin-news-list">
+                    <div class="bg-[#134E22] p-4 rounded-xl border border-[#1e7e34] flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] font-bold text-[#FF4500] uppercase">Chuyển nhượng</span>
+                            <h4 class="font-bold text-sm text-white">CLB hoàn tất hợp đồng mới cuối mùa giải.</h4>
+                            <span class="text-[10px] text-gray-400">Đăng ngày: 10/08/2026</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="p-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs">✏️ Sửa</button>
+                            <button class="p-1.5 bg-red-600 hover:bg-red-500 text-white rounded text-xs">🗑️ Xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CONTAINER DÀNH CHO MODAL/POPUP -->
+    <div id="modal-container"></div>
+
+    <!-- FOOTER COMPONENT -->
+    <div id="footer"></div>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+    <script type="module" src="../../js/adminjs/Admin_page.js"></script>
+    <script type="module" src="../../components/account_components.js"></script>
+</body>
+</html>

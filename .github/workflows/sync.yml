@@ -1,0 +1,17 @@
+name: Auto Sync Football Data
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Tự động chạy mỗi 15 phút
+  workflow_dispatch: # Cho phép bấm chạy thủ công trên GitHub
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install
+      - run: node data/Football_data.js

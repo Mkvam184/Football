@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football website</title>
+    
+    <link rel="stylesheet" href="css/navbar.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+</head>
+<body class="bg-[#071F0E] text-white min-h-screen flex flex-col m-0">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <main class="flex-grow space-y-8 md:space-y-16 py-6 md:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-16">
+
+            <!-- ==================== 1. HERO BANNER WELCOME ==================== -->
+            <div class="bg-gradient-to-r from-[#0D3B1B] to-[#134E22] border border-[#166534] rounded-2xl md:rounded-3xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
+                <!-- Hiệu ứng trang trí nền mờ -->
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 md:w-60 md:h-60 bg-[#FF4500]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-2xl space-y-4 md:space-y-6">
+                    <span class="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold tracking-wider uppercase bg-[#FF4500]/20 text-[#FF4500] border border-[#FF4500]/30">
+                        Sân Chơi Của Tín Đồ Túc Cầu
+                    </span>
+                    
+                    <h1 class="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                        Chào Mừng Bạn Đến Với <span class="text-[#FF4500]">FOOTBALL</span> World!
+                    </h1>
+                    
+                    <p class="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
+                        Nơi cập nhật từng nhịp đập của làng túc cầu thế giới. Từ những bàn thắng phút chót, bảng xếp hạng nghẹt thở cho đến các kỷ lục vô tiền khoáng hậu đều hội tụ tại đây.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <a href="#carousel-section" class="text-center px-6 py-3 rounded-full text-sm font-semibold bg-[#FF4500] text-white hover:bg-[#ff5714] shadow-lg shadow-[#FF4500]/30 hover:scale-105 active:scale-95 transition-all duration-200">
+                            Khám Phá Tin Tức
+                        </a>
+                        <a href="#" class="text-center px-6 py-3 rounded-full text-sm font-semibold bg-[#134E22] border border-[#1e7e34] text-white hover:bg-[#1e7e34] active:scale-95 transition-all duration-200">
+                            Xem Lịch Thi Đấu
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 2. CAROUSEL BÀI VIẾT CHÍNH (ĐÃ FIX MOBILE) ==================== -->
+            <section id="carousel-section" class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg sm:text-2xl font-black uppercase tracking-wider flex items-center gap-2">
+                        <span class="w-1.5 md:w-2 h-5 md:h-6 bg-[#FF4500] rounded-full inline-block"></span>
+                        Tiêu Điểm Bóng Đá
+                    </h2>
+                    <!-- Nút chuyển slide thủ công (Đã sửa icon) -->
+                    <div class="flex gap-2">
+                        <button id="prevBtn" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#0D3B1B] border border-[#166534] hover:bg-[#FF4500] hover:border-[#FF4500] flex items-center justify-center transition-all duration-200 cursor-pointer text-xs md:text-base">
+                            ◄
+                        </button>
+                        <button id="nextBtn" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#0D3B1B] border border-[#166534] hover:bg-[#FF4500] hover:border-[#FF4500] flex items-center justify-center transition-all duration-200 cursor-pointer text-xs md:text-base">
+                            ►
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Container Carousel -->
+                <div class="relative overflow-hidden rounded-2xl md:rounded-3xl border border-[#166534] bg-[#0D3B1B]">
+                    <div id="carouselTrack" class="flex transition-transform duration-500 ease-out">
+                        
+                        <!-- Slide 1 -->
+                        <div class="w-full flex-shrink-0 relative group min-h-[300px] sm:min-h-[380px] md:min-h-[460px] flex items-end p-4 sm:p-8 md:p-10 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(7,31,14,0.95) 10%, rgba(7,31,14,0.3)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1200');">
+                            <div class="max-w-2xl space-y-2 md:space-y-3 z-10 pb-4 sm:pb-0">
+                                <span class="px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold bg-[#FF4500] text-white">CHAMPIONS LEAGUE</span>
+                                <h3 class="text-lg sm:text-2xl md:text-4xl font-bold hover:text-[#FF4500] transition-colors cursor-pointer leading-snug">
+                                    Đại Chiến Châu Âu: Cuộc Chạm Trán Nghẹt Thở Ở Vòng Tứ Kết
+                                </h3>
+                                <p class="text-gray-300 text-xs sm:text-sm md:text-base line-clamp-2">
+                                    Những diễn biến hấp dẫn nhất đêm qua cùng màn lội ngược dòng kinh điển của đội chủ nhà làm nức lòng hàng triệu người hâm mộ.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="w-full flex-shrink-0 relative group min-h-[300px] sm:min-h-[380px] md:min-h-[460px] flex items-end p-4 sm:p-8 md:p-10 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(7,31,14,0.95) 10%, rgba(7,31,14,0.3)), url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1200');">
+                            <div class="max-w-2xl space-y-2 md:space-y-3 z-10 pb-4 sm:pb-0">
+                                <span class="px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold bg-[#FF4500] text-white">NGOẠI HẠNG ANH</span>
+                                <h3 class="text-lg sm:text-2xl md:text-4xl font-bold hover:text-[#FF4500] transition-colors cursor-pointer leading-snug">
+                                    Cuộc Đua Vô Địch Premier League: Kịch Tính Đến Phút Cuối
+                                </h3>
+                                <p class="text-gray-300 text-xs sm:text-sm md:text-base line-clamp-2">
+                                    Khoảng cách giữa các đội top đầu chỉ là 1 điểm duy nhất. Cùng phân tích lịch thi đấu chặng nước rút gay kịch.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="w-full flex-shrink-0 relative group min-h-[300px] sm:min-h-[380px] md:min-h-[460px] flex items-end p-4 sm:p-8 md:p-10 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(7,31,14,0.95) 10%, rgba(7,31,14,0.3)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200');">
+                            <div class="max-w-2xl space-y-2 md:space-y-3 z-10 pb-4 sm:pb-0">
+                                <span class="px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold bg-[#FF4500] text-white">CHUYỂN NHƯỢNG</span>
+                                <h3 class="text-lg sm:text-2xl md:text-4xl font-bold hover:text-[#FF4500] transition-colors cursor-pointer leading-snug">
+                                    Bom Tấn Mùa Hè: Siêu Sao Tiền Đạo Sắp Chuyển Bến Đỗ Mới
+                                </h3>
+                                <p class="text-gray-300 text-xs sm:text-sm md:text-base line-clamp-2">
+                                    Những thỏa thuận cá nhân đã hoàn tất. Thương vụ kỷ lục thế giới chuẩn bị kích hoạt trong tuần tới.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Dot chỉ số slide -->
+                    <div class="absolute bottom-2 right-4 md:bottom-4 md:right-6 flex gap-1.5 md:gap-2 z-20" id="dotsContainer">
+                        <button class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#FF4500] transition-all cursor-pointer" onclick="goToSlide(0)"></button>
+                        <button class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/40 hover:bg-white transition-all cursor-pointer" onclick="goToSlide(1)"></button>
+                        <button class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/40 hover:bg-white transition-all cursor-pointer" onclick="goToSlide(2)"></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 3. MÔ TẢ TÍNH NĂNG NỔI BẬT ==================== -->
+            <section class="space-y-6 md:space-y-8 pt-2">
+                <div class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3">
+                    <span class="text-[#FF4500] text-xs md:text-sm font-bold uppercase tracking-widest">Trải Nghiệm Toàn Diện</span>
+                    <h2 class="text-xl sm:text-3xl md:text-4xl font-black">Tại Sao Chọn <span class="text-[#FF4500]">FOOTBALL World</span>?</h2>
+                    <p class="text-gray-300 text-xs sm:text-sm md:text-base">Chúng tôi mang đến không gian giải trí đỉnh cao cho mọi fan hâm mộ trái bóng tròn với các tính năng ưu việt.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Feature 1 -->
+                    <div class="bg-gradient-to-b from-[#0D3B1B] to-[#071F0E] border border-[#166534] rounded-2xl md:rounded-3xl p-5 md:p-8 hover:border-[#FF4500]/50 transition-all duration-300 hover:-translate-y-1">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#FF4500]/20 flex items-center justify-center text-[#FF4500] font-black text-lg md:text-xl mb-3 md:mb-4 border border-[#FF4500]/30">
+                            ⚡
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold mb-1.5 md:mb-2">Tỷ Số & Lịch Thi Đấu Realtime</h3>
+                        <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                            Cập nhật tỷ số trực tuyến từng giây, thông báo bàn thắng, thẻ phạt và lịch thi đấu chi tiết của hơn 50+ giải đấu thế giới.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-gradient-to-b from-[#0D3B1B] to-[#071F0E] border border-[#166534] rounded-2xl md:rounded-3xl p-5 md:p-8 hover:border-[#FF4500]/50 transition-all duration-300 hover:-translate-y-1">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#FF4500]/20 flex items-center justify-center text-[#FF4500] font-black text-lg md:text-xl mb-3 md:mb-4 border border-[#FF4500]/30">
+                            📰
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold mb-1.5 md:mb-2">Tin Tức Độc Quyền</h3>
+                        <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                            Tổng hợp các tin nóng nhất, phân tích chiến thuật chuyên sâu và thông tin chuyển nhượng chính xác 24/7.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-gradient-to-b from-[#0D3B1B] to-[#071F0E] border border-[#166534] rounded-2xl md:rounded-3xl p-5 md:p-8 hover:border-[#FF4500]/50 transition-all duration-300 hover:-translate-y-1">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[#FF4500]/20 flex items-center justify-center text-[#FF4500] font-black text-lg md:text-xl mb-3 md:mb-4 border border-[#FF4500]/30">
+                            💬
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold mb-1.5 md:mb-2">Cộng Đồng Sôi Nổi</h3>
+                        <p class="text-gray-300 text-xs md:text-sm leading-relaxed">
+                            Tham gia bình luận trực tiếp trong trận đấu, bình chọn đội bóng yêu thích và giao lưu cùng hàng nghìn fan bóng đá khác.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="modal-container"></div>
+
+    <div id="footer"></div>
+
+    <script>
+    
+    window.addEventListener('pageshow', (event) => {
+        // event.persisted = true nghĩa là trang vừa được khôi phục từ bộ nhớ đệm (Back/Forward)
+        if (event.persisted || (performance && performance.getEntriesByType("navigation")[0]?.type === "back_forward")) {
+        // Ép trình duyệt tải lại trang để Navbar cập nhật đúng theo localStorage hiện tại
+        window.location.reload();
+        }
+    });
+    </script>
+
+    <script src="index.js"></script>
+    <script type="module" src="components/navbar_components.js"></script>
+    <script type="module" src="components/footer_components.js"></script>
+    <script type="module" src="components/auth_components.js"></script>
+</body>
+</html>

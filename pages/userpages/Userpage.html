@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Cá Nhân - Football Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/navbar.css">
+
+    <style>
+        #matches-carousel::-webkit-scrollbar {
+            display: none; /* Ẩn scrollbar trên Chrome/Safari/Edge */
+        }
+    </style>
+</head>
+<body class="bg-[#051C0C] text-white font-sans min-h-screen flex flex-col selection:bg-[#FF4500] selection:text-white">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- CAROUSEL TRẬN ĐẤU (HERO SECTION) -->
+    <section class="py-6 bg-gradient-to-b from-[#0D3B1B] to-[#051C0C] border-b border-[#166534]/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                    <h2 class="text-lg font-black tracking-wider uppercase text-gray-200">Các Trận Đấu Đề Xuất</h2>
+                </div>
+                <div class="flex gap-2">
+                    <button id="carousel-prev" class="w-8 h-8 bg-[#134E22] hover:bg-[#FF4500] border border-[#1e7e34] rounded-full flex items-center justify-center text-sm font-bold transition-colors cursor-pointer">◄</button>
+                    <button id="carousel-next" class="w-8 h-8 bg-[#134E22] hover:bg-[#FF4500] border border-[#1e7e34] rounded-full flex items-center justify-center text-sm font-bold transition-colors cursor-pointer">►</button>
+                </div>
+            </div>
+
+            <!-- Danh sách Matches Carousel -->
+            <div id="matches-carousel" class="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar py-2">
+                <div class="w-full text-center text-gray-400 py-6 italic text-sm">Đang tải danh sách trận đấu...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THÂN TRANG HỒ SƠ NGƯỜI DÙNG -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- CỘT TRÁI: THÔNG TIN CÁ NHÂN -->
+        <div class="lg:col-span-1 space-y-6">
+            <!-- Thẻ Hồ sơ -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-[#FF4500]/10 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-[#FF4500] to-yellow-400 p-1 mb-4 shadow-lg">
+                        <div class="w-full h-full bg-[#0D3B1B] rounded-full flex items-center justify-center font-black text-3xl text-white">
+                            <span id="profile-avatar">U</span>
+                        </div>
+                    </div>
+                    <h1 id="user-display-name" class="text-2xl font-black text-white">Đang tải...</h1>
+                    <p id="user-tag" class="text-xs text-[#FF4500] font-semibold mt-1">@username</p>
+                    
+                    <div class="mt-4 w-full border-t border-[#166534] pt-4 space-y-3 text-left text-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Email:</span>
+                            <span id="user-email" class="font-medium text-gray-200">---</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Tuổi:</span>
+                            <span id="user-age" class="font-medium text-gray-200">---</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Giới tính:</span>
+                            <span id="user-gender" class="font-medium text-gray-200">---</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">CLB Yêu Thích:</span>
+                            <span id="user-club" class="font-bold text-[#FF4500]">---</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thẻ Mục Giải Trí -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <h3 class="text-md font-bold mb-4 text-gray-200 uppercase tracking-wide flex items-center gap-2">
+                    📺 Thông Tin Giải Trí
+                </h3>
+                
+                <!-- Container render danh sách các thẻ YouTube (Thêm max-h, overflow và custom scrollbar) -->
+                <div id="user-entertainment-container" 
+                    class="grid grid-cols-1 gap-3 max-h-[400px] overflow-y-auto pr-2
+                            [&::-webkit-scrollbar]:w-2
+                            [&::-webkit-scrollbar-track]:bg-[#092812]
+                            [&::-webkit-scrollbar-track]:rounded-full
+                            [&::-webkit-scrollbar-thumb]:bg-[#166534]
+                            [&::-webkit-scrollbar-thumb]:rounded-full
+                            [&::-webkit-scrollbar-thumb:hover]:bg-[#22c55e]">
+                    <div class="text-center text-gray-400 py-4 italic text-sm">Đang tải danh sách giải trí...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CỘT PHẢI: KỶ LỤC & TIN TỨC CÁ NHÂN HÓA -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- Bảng Kỷ Lục -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-bold mb-4 text-gray-200 uppercase tracking-wide flex items-center gap-2">
+                    🏅 Kỷ Lục Nổi Bật
+                </h3>
+                <div id="user-records-container" class="space-y-4">
+                    <div class="text-center text-gray-400 py-4 italic text-sm">Đang tải kỷ lục...</div>
+                </div>
+            </div>
+
+            <!-- Tin tức gợi ý cho CLB yêu thích -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-bold mb-4 text-gray-200 uppercase tracking-wide">
+                    📰 Tin Tức Dành Cho Bạn
+                </h3>
+                <!-- Container render 2 bài viết mới nhất -->
+                <div id="user-news-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="col-span-2 text-center text-gray-400 py-4 italic text-sm">Đang tải tin tức...</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL CHI TIẾT TRẬN ĐẤU -->
+    <div id="modal-match-detail" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 transition-opacity duration-200 opacity-0">
+        <div class="modal-content-box bg-[#0D3B1B] border border-[#166534] w-full max-w-lg rounded-2xl shadow-2xl p-6 relative transform transition-all duration-200 scale-95 text-white">
+            <button id="btn-close-match-detail" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-1">✕</button>
+            <h3 class="text-center text-xs uppercase font-bold text-[#FF4500] tracking-wider mb-2">Chi Tiết Trận Đấu</h3>
+
+            <div class="flex items-center justify-between my-4 bg-[#051C0C] p-4 rounded-xl border border-[#166534]">
+                <div class="flex-1 text-center font-bold text-sm" id="detail-home-name">--</div>
+                <div class="px-4 py-1.5 bg-[#FF4500] text-white font-black text-lg rounded-lg mx-2" id="detail-score">VS</div>
+                <div class="flex-1 text-center font-bold text-sm" id="detail-away-name">--</div>
+            </div>
+
+            <div class="space-y-2 text-xs border-t border-[#166534] pt-4">
+                <div id="detail-status-container" class="flex justify-between py-1 border-b border-[#166534]/50">
+                    <span class="text-gray-400">Trạng thái:</span>
+                    <span id="detail-status" class="font-bold">--</span>
+                </div>
+                <div id="detail-datetime-container" class="flex justify-between py-1 border-b border-[#166534]/50">
+                    <span class="text-gray-400">Thời gian:</span>
+                    <span id="detail-datetime" class="text-gray-200 font-semibold">--</span>
+                </div>
+                <div id="detail-stadium-container" class="flex justify-between py-1 border-b border-[#166534]/50">
+                    <span class="text-gray-400">Sân vận động:</span>
+                    <span id="detail-stadium" class="text-gray-200 font-semibold">--</span>
+                </div>
+                <div id="detail-matchday-container" class="flex justify-between py-1 border-b border-[#166534]/50">
+                    <span class="text-gray-400">Vòng đấu:</span>
+                    <span id="detail-matchday" class="text-gray-200 font-semibold">--</span>
+                </div>
+                <div id="detail-referee-container" class="flex justify-between py-1">
+                    <span class="text-gray-400">Trọng tài:</span>
+                    <span id="detail-referee" class="text-gray-200 font-semibold">--</span>
+                </div>
+            </div>
+
+            <div class="mt-6 text-right">
+                <button id="btn-done-match-detail" class="px-5 py-2 bg-[#166534] hover:bg-[#FF4500] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-container"></div>
+    <div id="footer"></div>
+
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+    <script type="module" src="../../js/userjs/Userpage.js"></script>
+    <script type="module" src="../../components/account_components.js"></script>
+</body>
+</html>

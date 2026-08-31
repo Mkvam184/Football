@@ -1,0 +1,11 @@
+{
+  "name": "football-cron-sync",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "sync:football": "node data/Football_data.js"
+  },
+  "dependencies": {
+    "firebase": "^10.0.0"
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức Bóng Đá - Trang Cá Nhân</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#071F0E] text-white min-h-screen font-sans antialiased">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- Container chính -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- HEADER PHẦN TIN TỨC -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-[#166534] pb-6">
+            <div>
+                <span class="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-[#FF4500]/20 text-[#FF4500] border border-[#FF4500]/30 rounded-full">
+                    Bản Tin Tốc Độ
+                </span>
+                <h1 class="text-3xl font-black text-white mt-2 flex items-center gap-2">
+                    <span>📰</span> TIN TỨC BÓNG ĐÁ
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">Cập nhật tin tức mới nhất và các bài viết dành riêng cho bạn</p>
+            </div>
+
+            <!-- Ô Tìm Kiếm Tin Tức -->
+            <div class="relative w-full md:w-72">
+                <input 
+                  type="text" 
+                  id="search-news-input" 
+                  placeholder="Tìm bài viết, câu lạc bộ..." 
+                  class="w-full pl-10 pr-4 py-2.5 bg-[#0D3B1B] border border-[#166534] rounded-full text-xs text-white placeholder-gray-400 focus:outline-none focus:border-[#FF4500] transition-all shadow-inner">
+                <span class="absolute left-3.5 top-2.5 text-gray-400 text-sm">🔍</span>
+            </div>
+        </div>
+
+        <!-- BỘ LỌC TABS (DANH MỤC) -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
+            <button data-category="all" class="news-tab active px-5 py-2 rounded-full text-xs font-bold transition-all bg-[#FF4500] text-white shadow-md cursor-pointer whitespace-nowrap">
+                🔥 Tất Cả Tin Nóng
+            </button>
+            <button data-category="my-team" class="news-tab px-5 py-2 rounded-full text-xs font-bold transition-all bg-[#0D3B1B] text-gray-300 border border-[#166534] hover:border-[#FF4500] hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1.5">
+                <span>⚽</span> CLB Yêu Thích (<span id="user-fav-team-label">CLB</span>)
+            </button>
+            <button data-category="saved" class="news-tab px-5 py-2 rounded-full text-xs font-bold transition-all bg-[#0D3B1B] text-gray-300 border border-[#166534] hover:border-[#FF4500] hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1.5">
+                <span>🔖</span> Tin Đã Lưu (<span id="saved-count">0</span>)
+            </button>
+        </div>
+
+        <!-- DANH SÁCH BÀI VIẾT (GRID LAYOUT) -->
+        <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loading Skeleton (Hiển thị khi đang tải dữ liệu) -->
+            <div class="col-span-full flex flex-col items-center justify-center py-16 space-y-3">
+                <div class="animate-spin rounded-full h-10 w-10 border-4 border-[#FF4500] border-t-transparent"></div>
+                <p class="text-xs text-gray-400 font-medium">Đang tải tin tức bóng đá mới nhất...</p>
+            </div>
+        </div>
+
+        <!-- THÔNG BÁO RỖNG (Renders khi không tìm thấy tin) -->
+        <div id="empty-news-msg" class="hidden text-center py-16 bg-[#0D3B1B]/40 border border-[#166534]/50 rounded-2xl">
+            <div class="text-4xl mb-3">📭</div>
+            <h3 class="text-lg font-bold text-white">Không tìm thấy bài viết nào</h3>
+            <p class="text-xs text-gray-400 mt-1">Hãy thử tìm kiếm với từ khóa khác hoặc chuyển danh mục.</p>
+        </div>
+
+    </div>
+
+    <div id="modal-container"></div>
+
+    <div id="footer"></div>
+
+    <!-- Script xử lý tin tức -->
+    <script type="module" src="../../js/userjs/Blog_user.js"></script>
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+</body>
+</html>

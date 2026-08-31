@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Giải Đấu & Đội Bóng</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #071F0E;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #166534;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #FF4500;
+        }
+    </style>
+</head>
+<body class="bg-[#071F0E] text-white min-h-screen font-sans antialiased">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- HEADER TRANG -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-[#166534] pb-6">
+            <div>
+                <span class="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-[#FF4500]/20 text-[#FF4500] border border-[#FF4500]/30 rounded-full">
+                    MÙA GIẢI 2025 - 2026
+                </span>
+                <h1 class="text-3xl font-black text-white mt-2 flex items-center gap-2">
+                    <span>🏆</span> GIẢI ĐẤU & ĐỘI BÓNG
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">Xem vị trí Bảng xếp hạng và Lịch thi đấu cập nhật trực tiếp từ hệ thống</p>
+            </div>
+        </div>
+
+        <!-- 1. BỘ THẺ CHỌN GIẢI ĐẤU -->
+        <div class="mb-8">
+            <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">Chọn Giải Đấu</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="league-cards-container">
+                
+                <!-- Premier League -->
+                <button data-league="epl" class="league-card active border-2 border-[#FF4500] bg-[#0D3B1B] p-4 rounded-xl text-left hover:border-[#FF4500] transition-all cursor-pointer shadow-lg group">
+                    <img src="https://crests.football-data.org/PL.png" alt="Premier League" class="w-8 h-8 object-contain mb-2 filter drop-shadow">
+                    <strong class="text-sm font-bold text-white block group-hover:text-[#FF4500]">Premier League</strong>
+                    <span class="text-[10px] text-gray-400">Ngoại Hạng Anh</span>
+                </button>
+
+                <!-- La Liga -->
+                <button data-league="laliga" class="league-card border-2 border-[#166534] bg-[#0D3B1B] p-4 rounded-xl text-left hover:border-[#FF4500] transition-all cursor-pointer shadow-lg group">
+                    <img src="https://crests.football-data.org/PD.png" alt="La Liga" class="w-8 h-8 object-contain mb-2 filter drop-shadow">
+                    <strong class="text-sm font-bold text-white block group-hover:text-[#FF4500]">La Liga</strong>
+                    <span class="text-[10px] text-gray-400">Tây Ban Nha</span>
+                </button>
+
+                <!-- Bundesliga -->
+                <button data-league="bl1" class="league-card border-2 border-[#166534] bg-[#0D3B1B] p-4 rounded-xl text-left hover:border-[#FF4500] transition-all cursor-pointer shadow-lg group">
+                    <img src="https://crests.football-data.org/BL1.png" alt="Bundesliga" class="w-8 h-8 object-contain mb-2 filter drop-shadow">
+                    <strong class="text-sm font-bold text-white block group-hover:text-[#FF4500]">Bundesliga</strong>
+                    <span class="text-[10px] text-gray-400">VĐQG Đức</span>
+                </button>
+
+                <!-- Serie A -->
+                <button data-league="seriea" class="league-card border-2 border-[#166534] bg-[#0D3B1B] p-4 rounded-xl text-left hover:border-[#FF4500] transition-all cursor-pointer shadow-lg group">
+                    <img src="https://crests.football-data.org/SA.png" alt="Serie A" class="w-8 h-8 object-contain mb-2 filter drop-shadow">
+                    <strong class="text-sm font-bold text-white block group-hover:text-[#FF4500]">Serie A</strong>
+                    <span class="text-[10px] text-gray-400">Ý</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- 2. DANH SÁCH CÁC ĐỘI BÓNG THUỘC GIẢI -->
+        <div class="mb-10">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider">
+                    Danh Sách Đội Bóng <span id="current-league-name" class="text-[#FF4500]">(Premier League)</span>
+                </h2>
+                <div class="relative w-64">
+                    <input type="text" id="search-team-input" placeholder="Tìm đội..." class="w-full pl-8 pr-3 py-1.5 bg-[#0D3B1B] border border-[#166534] rounded-full text-xs text-white focus:outline-none focus:border-[#FF4500]">
+                    <span class="absolute left-2.5 top-1.5 text-gray-400 text-xs">🔍</span>
+                </div>
+            </div>
+
+            <div id="team-cards-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                <!-- JS Render -->
+            </div>
+        </div>
+
+        <!-- 3. LAYOUT: LỊCH THI ĐẤU & BẢNG XẾP HẠNG -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- CỘT BÊN TRÁI: LỊCH THI ĐẤU -->
+            <div class="lg:col-span-7 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🗓️</span> Lịch Thi Đấu & Kết Quả
+                    </h2>
+                    <span id="selected-team-info" class="text-xs text-[#FF4500] font-semibold">Hiển thị tất cả trận đấu</span>
+                </div>
+
+                <div class="max-h-[520px] overflow-y-auto pr-2 custom-scrollbar">
+                    <div id="team-fixtures-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <!-- JS Render -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘT BÊN PHẢI: BẢNG XẾP HẠNG -->
+            <div class="lg:col-span-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>📊</span> Bảng Xếp Hạng
+                    </h2>
+                </div>
+
+                <div class="max-h-[520px] overflow-y-auto pr-1 custom-scrollbar bg-[#0D3B1B] border border-[#166534] rounded-2xl shadow-xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="sticky top-0 z-10 bg-[#071F0E]">
+                            <tr class="text-gray-400 border-b border-[#166534]">
+                                <th class="py-3 px-2 font-semibold text-center w-8">#</th>
+                                <th class="py-3 px-3 font-semibold">Đội bóng</th>
+                                <th class="py-3 px-1.5 font-semibold text-center">ST</th>
+                                <th class="py-3 px-1.5 font-semibold text-center">T</th>
+                                <th class="py-3 px-1.5 font-semibold text-center">H</th>
+                                <th class="py-3 px-1.5 font-semibold text-center">B</th>
+                                <th class="py-3 px-1.5 font-semibold text-center hidden sm:table-cell">HS</th>
+                                <th class="py-3 px-2 font-semibold text-center text-white font-bold">ĐIỂM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standings-table-body" class="divide-y divide-[#166534]/40">
+                            <!-- JS Render -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL CHI TIẾT TRẬN ĐẤU -->
+    <div id="modal-match-detail" class="fixed inset-0 bg-black/75 backdrop-blur-sm hidden items-center justify-center z-50 p-4 opacity-0 transition-opacity duration-200 ease-out">
+        <div class="modal-content-box bg-[#0D3B1B] border border-[#166534] rounded-2xl p-6 w-full max-w-lg shadow-2xl space-y-5 transform scale-95 transition-transform duration-200 ease-out">
+            
+            <div class="flex items-center justify-between border-b border-[#166534] pb-3">
+                <span class="text-xs font-bold text-[#FF4500] uppercase tracking-wider flex items-center gap-1">
+                    ⚽ Chi Tiết Trận Đấu
+                </span>
+                <button id="btn-close-match-detail" class="text-gray-400 hover:text-white text-lg font-bold cursor-pointer">✕</button>
+            </div>
+
+            <div class="bg-[#071F0E] border border-[#166534] rounded-xl p-4 flex items-center justify-between text-center">
+                <div class="flex-1">
+                    <p id="detail-home-name" class="font-black text-sm text-white uppercase truncate">ĐỘI NHÀ</p>
+                    <span class="text-[10px] text-gray-400">Chủ nhà</span>
+                </div>
+                
+                <div class="px-4">
+                    <span id="detail-score" class="text-xl font-black text-[#FF4500] bg-[#0D3B1B] px-3 py-1 rounded-lg border border-[#166534] block">VS</span>
+                </div>
+
+                <div class="flex-1">
+                    <p id="detail-away-name" class="font-black text-sm text-white uppercase truncate">ĐỘI KHÁCH</p>
+                    <span class="text-[10px] text-gray-400">Đội khách</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-xs">
+                <div id="detail-status-container" class="bg-[#071F0E]/60 p-3 rounded-lg border border-[#166534]/50">
+                    <span class="text-gray-400 block text-[10px] uppercase mb-1">📌 Trạng thái</span>
+                    <strong id="detail-status" class="text-amber-400 block font-semibold">CHƯA DIỄN RA</strong>
+                </div>
+
+                <div id="detail-datetime-container" class="bg-[#071F0E]/60 p-3 rounded-lg border border-[#166534]/50 hidden">
+                    <span class="text-gray-400 block text-[10px] uppercase mb-1">📅 Ngày & Giờ</span>
+                    <strong id="detail-datetime" class="text-white block font-semibold">--</strong>
+                </div>
+
+                <div id="detail-matchday-container" class="bg-[#071F0E]/60 p-3 rounded-lg border border-[#166534]/50 hidden">
+                    <span class="text-gray-400 block text-[10px] uppercase mb-1">🏆 Vòng đấu</span>
+                    <strong id="detail-matchday" class="text-white block font-semibold">--</strong>
+                </div>
+
+                <div id="detail-stadium-container" class="bg-[#071F0E]/60 p-3 rounded-lg border border-[#166534]/50 hidden">
+                    <span class="text-gray-400 block text-[10px] uppercase mb-1">🏟️ Sân vận động</span>
+                    <strong id="detail-stadium" class="text-white block font-semibold">--</strong>
+                </div>
+
+                <div id="detail-referee-container" class="bg-[#071F0E]/60 p-3 rounded-lg border border-[#166534]/50 hidden col-span-2">
+                    <span class="text-gray-400 block text-[10px] uppercase mb-1">👨‍⚖️ Trọng tài</span>
+                    <strong id="detail-referee" class="text-white block font-semibold">--</strong>
+                </div>
+            </div>
+
+            <div class="text-right border-t border-[#166534] pt-3">
+                <button id="btn-done-match-detail" class="px-5 py-2 bg-[#166534] hover:bg-[#1e8444] text-white text-xs font-bold rounded-lg cursor-pointer transition-all">
+                    Đóng
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+    <script type="module" src="../../js/userjs/Tournament_user.js"></script>
+</body>
+</html>

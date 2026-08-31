@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Luật Bóng Đá & Quy Định Sân (Admin)</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen font-sans antialiased selection:bg-[#FF4500] selection:text-white m-0 p-0 border-none">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- HEADER TRANG ADMIN & THỐNG KÊ (ĐÃ ĐỒNG BỘ NÚT BẤM & TỐI ƯU MOBILE) -->
+    <div class="w-full bg-[#080808] border-b border-white/10 py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+            
+            <!-- Tiêu đề & Thông tin Admin -->
+            <div class="space-y-1.5">
+                <span class="px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-widest bg-red-500/20 text-red-400 border border-red-500/30 rounded-full shadow-sm">
+                    Admin Dashboard
+                </span>
+                <h1 class="text-2xl sm:text-3xl xl:text-4xl font-black text-white tracking-tight flex items-center gap-2.5">
+                    <span>⚽</span> QUẢN LÝ LUẬT BÓNG ĐÁ
+                </h1>
+                <p class="text-xs text-gray-400">Cập nhật điều lệ trận đấu, quy định sân bãi và màu sắc hiển thị</p>
+            </div>
+
+            <!-- Dãy Card Thống Kê Dài & Nút Thêm Mới Đồng Bộ Bằng Chiều Cao -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full xl:w-auto">
+                
+                <!-- 1. Thống kê Luật Thi Đấu (Dài ra) -->
+                <div class="bg-amber-950/40 border border-amber-500/30 px-4 py-2.5 rounded-2xl flex items-center gap-3 shadow-md h-14">
+                    <span class="text-2xl shrink-0">🟥</span>
+                    <div class="min-w-0">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block truncate">Luật Thi Đấu</span>
+                        <strong id="stat-rules-count" class="text-base sm:text-lg font-black text-amber-400 leading-none">0</strong>
+                    </div>
+                </div>
+
+                <!-- 2. Thống kê Quy Định Sân Bãi (Dài ra) -->
+                <div class="bg-blue-950/40 border border-blue-500/30 px-4 py-2.5 rounded-2xl flex items-center gap-3 shadow-md h-14">
+                    <span class="text-2xl shrink-0">🏟️</span>
+                    <div class="min-w-0">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block truncate">Quy Định Sân</span>
+                        <strong id="stat-privacy-count" class="text-base sm:text-lg font-black text-blue-400 leading-none">0</strong>
+                    </div>
+                </div>
+
+                <!-- 3. Thống kê Điều Lệ Giải (Dài ra) -->
+                <div class="bg-purple-950/40 border border-purple-500/30 px-4 py-2.5 rounded-2xl flex items-center gap-3 shadow-md h-14">
+                    <span class="text-2xl shrink-0">🏆</span>
+                    <div class="min-w-0">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block truncate">Điều Lệ Giải</span>
+                        <strong id="stat-tournament-count" class="text-base sm:text-lg font-black text-purple-400 leading-none">0</strong>
+                    </div>
+                </div>
+
+                <!-- 4. Nút Thêm Luật Mới (Đã làm ngắn lại, chiều cao bằng thẻ h-14, giao diện thiết kế đẹp mắt) -->
+                <button id="btn-open-create-rule" class="bg-gradient-to-r from-[#FF4500] to-[#E63900] hover:from-[#ff5714] hover:to-[#ff4500] border border-orange-400/40 px-3.5 py-2.5 rounded-2xl flex items-center justify-center gap-2 shadow-lg h-14 cursor-pointer active:scale-95 transition-all text-white font-extrabold text-xs">
+                    <span class="text-lg">➕</span>
+                    <span class="truncate">Thêm Luật Mới</span>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER - HIỂN THỊ 2 THẺ TÊN 1 DÒNG (MD:GRID-COLS-2) -->
+    <main class="w-full flex flex-col m-0 p-0">
+
+        <!-- DÃY 1: LUẬT THI ĐẤU -->
+        <section class="w-full bg-gradient-to-b from-[#382104] via-[#241402] to-[#140A01] border-b border-amber-500/20 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-amber-400 block mb-1">Match Rules</span>
+                        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
+                            <span class="text-amber-500">🟥</span> Các Điều Luật Thi Đấu & Thẻ Phạt
+                        </h2>
+                    </div>
+                </div>
+                
+                <!-- Grid: 1 cột trên Mobile, 2 cột trên Desktop -->
+                <div id="admin-rules-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+            </div>
+        </section>
+
+        <!-- DÃY 2: QUY ĐỊNH SÂN BÃI -->
+        <section class="w-full bg-gradient-to-b from-[#092047] via-[#05132D] to-[#020B1C] border-b border-blue-500/20 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-blue-300 block mb-1">Pitch Policies</span>
+                        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
+                            <span class="text-blue-400">🏟️</span> Quy Định Sân Bãi & Đặt Chỗ
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Grid: 1 cột trên Mobile, 2 cột trên Desktop -->
+                <div id="admin-privacy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+            </div>
+        </section>
+
+        <!-- DÃY 3: ĐIỀU LỆ GIẢI ĐẤU -->
+        <section class="w-full bg-gradient-to-b from-[#2A083B] via-[#1A0326] to-[#0D0114] border-b border-purple-500/20 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-purple-300 block mb-1">Tournament & Discipline</span>
+                        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
+                            <span class="text-purple-400">🏆</span> Điều Lệ Giải Đấu & Xử Lý Kỷ Luật
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Grid: 1 cột trên Mobile, 2 cột trên Desktop -->
+                <div id="admin-tournament-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL POPUP: THÊM / SỬA LUẬT -->
+    <div id="rule-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 p-4">
+        <div id="rule-modal-content" class="bg-[#0A1118] border border-gray-700 w-full max-w-2xl rounded-3xl p-5 sm:p-7 shadow-2xl relative transform scale-95 transition-all duration-300 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-5 border-b border-gray-800 pb-3">
+                <h3 id="rule-modal-title" class="text-lg font-black text-white uppercase tracking-wide flex items-center gap-2">
+                    ⚽ Thêm Điều Luật Mới
+                </h3>
+                <button id="close-rule-modal" type="button" class="text-gray-400 hover:text-white font-bold text-xl cursor-pointer">✕</button>
+            </div>
+
+            <form id="rule-form" class="space-y-4" novalidate>
+                <input type="hidden" id="rule-id">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Phân loại điều luật</label>
+                        <select id="rule-type" class="w-full bg-[#121B24] border border-gray-700 focus:border-[#FF4500] text-xs sm:text-sm text-white px-3.5 py-2.5 rounded-xl outline-none transition-all">
+                            <option value="rules">🟥 Luật thi đấu & Thẻ phạt</option>
+                            <option value="privacy">🏟️ Quy định sân bãi & Đặt sân</option>
+                            <option value="tournament">🏆 Điều lệ giải & Kỷ luật</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Biểu tượng (Icon / Emoji)</label>
+                        <input type="text" id="rule-icon" placeholder="VD: ⚽, 🟥, 🟨, 🏟️, 🛡️" class="w-full bg-[#121B24] border border-gray-700 focus:border-[#FF4500] text-xs sm:text-sm text-white px-3.5 py-2.5 rounded-xl outline-none transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Tên điều luật</label>
+                    <input type="text" id="rule-title" placeholder="VD: Điều 12 - Lỗi hành vi và Hành vi khiếm nhã" class="w-full bg-[#121B24] border border-gray-700 focus:border-[#FF4500] text-xs sm:text-sm text-white px-3.5 py-2.5 rounded-xl outline-none transition-all font-bold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-2">Chọn phong cách màu nền:</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="color-presets">
+                        <button type="button" data-bg="bg-gradient-to-r from-[#241402] via-[#382104] to-[#140A01]" data-border="border-amber-500/40" class="btn-color-pick h-10 rounded-xl border border-amber-500 bg-[#241402] hover:scale-105 transition-all text-xs font-bold text-amber-400 flex items-center justify-center gap-1">
+                            <span>🟧</span> Hổ Phách
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#05132D] via-[#092047] to-[#020B1C]" data-border="border-blue-500/40" class="btn-color-pick h-10 rounded-xl border border-blue-500 bg-[#05132D] hover:scale-105 transition-all text-xs font-bold text-blue-400 flex items-center justify-center gap-1">
+                            <span>🟦</span> Xanh Băng
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#032318] via-[#063323] to-[#010D09]" data-border="border-emerald-500/40" class="btn-color-pick h-10 rounded-xl border border-emerald-500 bg-[#032318] hover:scale-105 transition-all text-xs font-bold text-emerald-400 flex items-center justify-center gap-1">
+                            <span>🟩</span> Sân Cỏ
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#2D0505] via-[#470909] to-[#1C0202]" data-border="border-red-500/40" class="btn-color-pick h-10 rounded-xl border border-red-500 bg-[#2D0505] hover:scale-105 transition-all text-xs font-bold text-red-400 flex items-center justify-center gap-1">
+                            <span>🟥</span> Thẻ Đỏ
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#1C052D] via-[#320947] to-[#0F021C]" data-border="border-purple-500/40" class="btn-color-pick h-10 rounded-xl border border-purple-500 bg-[#1C052D] hover:scale-105 transition-all text-xs font-bold text-purple-400 flex items-center justify-center gap-1">
+                            <span>🟪</span> Hoàng Gia
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#2D1F05] via-[#473309] to-[#1C1202]" data-border="border-yellow-500/40" class="btn-color-pick h-10 rounded-xl border border-yellow-500 bg-[#2D1F05] hover:scale-105 transition-all text-xs font-bold text-yellow-400 flex items-center justify-center gap-1">
+                            <span>🟨</span> Thẻ Vàng
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#111827] via-[#1F2937] to-[#030712]" data-border="border-gray-500/40" class="btn-color-pick h-10 rounded-xl border border-gray-500 bg-[#111827] hover:scale-105 transition-all text-xs font-bold text-gray-300 flex items-center justify-center gap-1">
+                            <span>⬛</span> Hắc Diệu
+                        </button>
+                        <button type="button" data-bg="bg-gradient-to-r from-[#2D0518] via-[#470929] to-[#1C020F]" data-border="border-pink-500/40" class="btn-color-pick h-10 rounded-xl border border-pink-500 bg-[#2D0518] hover:scale-105 transition-all text-xs font-bold text-pink-400 flex items-center justify-center gap-1">
+                            <span>🪷</span> Hồng Thạch
+                        </button>
+                    </div>
+                    <input type="hidden" id="rule-bg-color" value="bg-gradient-to-r from-[#241402] via-[#382104] to-[#140A01]">
+                    <input type="hidden" id="rule-border-color" value="border-amber-500/40">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Nội dung chi tiết luật</label>
+                    <textarea id="rule-content" rows="5" placeholder="Nhập chi tiết điều luật..." class="w-full bg-[#121B24] border border-gray-700 focus:border-[#FF4500] text-xs sm:text-sm text-white px-3.5 py-2.5 rounded-xl outline-none transition-all resize-y leading-relaxed"></textarea>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="btn-cancel-rule-modal" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-xl text-xs font-bold transition-all border border-gray-600 cursor-pointer">Hủy Bỏ</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-[#FF4500] hover:bg-[#ff5714] text-white rounded-xl text-xs font-bold shadow-lg transition-all cursor-pointer">Lưu Điều Luật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+    <script type="module" src="../../js/adminjs/Regulations_admin.js"></script>
+</body>
+</html>

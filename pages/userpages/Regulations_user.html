@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quy Định & Điều Khoản Sử Dụng</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen font-sans antialiased selection:bg-[#FF4500] selection:text-white m-0 p-0 border-none">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- HEADER TRANG KẾT HỢP QUYỀN LỢI NGƯỜI DÙNG -->
+    <div class="w-full bg-gradient-to-b from-[#080808] via-[#0D1520] to-[#080808] border-b border-white/10 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-8">
+            
+            <!-- TIÊU ĐỀ CHÍNH & TRẠNG THÁI -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-widest bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full shadow-sm">
+                        Trung Tâm Pháp Lý
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight flex items-center gap-3">
+                        <span>📜</span> QUY ĐỊNH & ĐIỀU KHOẢN
+                    </h1>
+                    <p class="text-xs text-gray-400 mt-1">Các nguyên tắc hoạt động, quy định sân bãi và điều lệ giải đấu</p>
+                </div>
+
+                <!-- Indicator Trạng thái tài khoản -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-lg self-start md:self-auto">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <span class="text-[10px] text-gray-400 uppercase font-semibold block tracking-wider">Trạng thái tài khoản</span>
+                        <strong id="user-status-display" class="text-xs text-emerald-400 font-extrabold">Đang kiểm tra...</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KHỐI QUYỀN LỢI NGƯỜI DÙNG (CHIẾM TRỌN 100% CHIỀU RỘNG) -->
+            <div class="pt-2">
+                <div class="bg-[#0D4230]/50 border border-emerald-500/30 rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:border-emerald-400 transition-all duration-300 group backdrop-blur-md">
+                    <div class="absolute -right-4 -bottom-4 text-8xl opacity-10 font-black text-emerald-400 select-none pointer-events-none">VIP</div>
+                    <div class="space-y-2 max-w-3xl">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-0.5 text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full">
+                                Quyền Lợi Đã Xác Minh
+                            </span>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-black/60 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                                Cam Kết 100%
+                            </span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
+                            <span>🤝</span> Quyền Lợi Thành Viên
+                        </h3>
+                        <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
+                            Bạn có toàn quyền truy cập các tài nguyên công khai, bảo vệ tài khoản bằng xác thực nhiều lớp, và có quyền yêu cầu trích xuất hoặc xóa bỏ dữ liệu cá nhân bất kỳ lúc nào.
+                        </p>
+                    </div>
+
+                    <button id="btn-export-data" class="w-full sm:w-auto shrink-0 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs rounded-xl text-center transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap">
+                        <span>📥</span> Yêu Cầu Tải Dữ Liệu Cá Nhân
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER - CÁC DÃY DỮ LIỆU TỪ FIREBASE -->
+    <main class="w-full flex flex-col m-0 p-0">
+
+        <!-- DÃY 1: ĐIỀU LUẬT THI ĐẤU - DÃY MÀU VÀNG/CAM -->
+        <section class="w-full bg-gradient-to-b from-[#382104] via-[#241402] to-[#140A01] border-b border-amber-500/20 py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-amber-400 block mb-1">Match Rules</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-amber-500">⚽</span> Điều Luật Thi Đấu
+                        </h2>
+                    </div>
+                    <span class="text-xs font-bold text-amber-200 bg-amber-950/80 border border-amber-700/50 px-4 py-1.5 rounded-full hidden sm:inline-block">
+                        Bắt buộc tuân thủ
+                    </span>
+                </div>
+
+                <div id="rules-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- JS render điều luật thi đấu -->
+                </div>
+            </div>
+        </section>
+
+        <!-- DÃY 2: QUY ĐỊNH SÂN BÃI - DÃY MÀU XANH DƯƠNG -->
+        <section class="w-full bg-gradient-to-b from-[#092047] via-[#05132D] to-[#020B1C] border-b border-blue-500/20 py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-blue-300 block mb-1">Stadium Guidelines</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-blue-400">🏟️</span> Quy Định Sân Bãi
+                        </h2>
+                    </div>
+                    <span class="text-xs font-bold text-blue-200 bg-blue-950/80 border border-blue-700/50 px-4 py-1.5 rounded-full hidden sm:inline-block">
+                        An toàn sân bãi
+                    </span>
+                </div>
+
+                <div id="privacy-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- JS render quy định sân bãi -->
+                </div>
+            </div>
+        </section>
+
+        <!-- DÃY 3: ĐIỀU LỆ GIẢI ĐẤU - DÃY MÀU TÍM -->
+        <section class="w-full bg-gradient-to-b from-[#2D0947] via-[#1C052D] to-[#0F021C] py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-purple-300 block mb-1">Tournament Rules</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-purple-400">🏆</span> Điều Lệ Giải Đấu
+                        </h2>
+                    </div>
+                    <span class="text-xs font-bold text-purple-200 bg-purple-950/80 border border-purple-700/50 px-4 py-1.5 rounded-full hidden sm:inline-block">
+                        Quy định giải đấu
+                    </span>
+                </div>
+
+                <div id="tournament-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <!-- JS render điều lệ giải đấu -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="modal-container"></div>
+    <div id="footer"></div>
+
+    <!-- Script xử lý -->
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+    <script type="module" src="../../js/userjs/Regulations_user.js"></script>
+</body>
+</html>

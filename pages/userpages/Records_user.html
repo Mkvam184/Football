@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ Lục & Cột Mốc Giải Đấu</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#071F0E] text-white min-h-screen font-sans antialiased">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- HEADER TRANG -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-[#166534] pb-6">
+            <div>
+                <span class="px-3 py-1 text-[11px] font-bold uppercase tracking-wider bg-[#FF4500]/20 text-[#FF4500] border border-[#FF4500]/30 rounded-full">
+                    Lịch Sử & Huyền Thoại
+                </span>
+                <h1 class="text-3xl font-black text-white mt-2 flex items-center gap-2">
+                    <span>👑</span> BẢNG KỶ LỤC & CỘT MỐC
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">Tôn vinh những kỷ lục vô tiền khoáng hậu của các cầu thủ và câu lạc bộ qua từng mùa giải</p>
+            </div>
+
+            <!-- Indicator Đội bóng theo dõi -->
+            <div class="bg-[#0D3B1B] border border-[#166534] rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-md">
+                <span class="text-xl">⚽</span>
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase font-semibold block">Đội bóng của bạn</span>
+                    <strong id="fav-team-display" class="text-xs text-[#FF4500]">Đang tải...</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- THẺ KỶ LỤC ĐỈNH CAO (FEATURED RECORDS) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            
+            <!-- Thẻ 1: Tổng số kỷ lục -->
+            <div class="bg-[#0D3B1B] border border-[#166534] p-5 rounded-2xl shadow-xl relative overflow-hidden group hover:border-[#FF4500] transition-all">
+                <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 font-black">🏆</div>
+                <span class="text-[10px] uppercase font-extrabold text-[#FF4500] tracking-wider block">Tổng số kỷ lục</span>
+                <h3 id="stat-total-user" class="text-2xl font-black text-white mt-1">0</h3>
+                <span class="text-[11px] text-gray-400 block mt-0.5">Toàn hệ thống</span>
+            </div>
+
+            <!-- Thẻ 2: Cầu thủ -->
+            <div class="bg-[#0D3B1B] border border-[#166534] p-5 rounded-2xl shadow-xl relative overflow-hidden group hover:border-[#FF4500] transition-all">
+                <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 font-black">👤</div>
+                <span class="text-[10px] uppercase font-extrabold text-blue-400 tracking-wider block">Kỷ lục Cầu thủ</span>
+                <h3 id="stat-player-user" class="text-2xl font-black text-white mt-1">0</h3>
+                <span class="text-[11px] text-gray-400 block mt-0.5">Danh mục cá nhân</span>
+            </div>
+
+            <!-- Thẻ 3: CLB -->
+            <div class="bg-[#0D3B1B] border border-[#166534] p-5 rounded-2xl shadow-xl relative overflow-hidden group hover:border-[#FF4500] transition-all">
+                <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 font-black">🛡️</div>
+                <span class="text-[10px] uppercase font-extrabold text-yellow-400 tracking-wider block">Kỷ lục Câu lạc bộ</span>
+                <h3 id="stat-club-user" class="text-2xl font-black text-white mt-1">0</h3>
+                <span class="text-[11px] text-gray-400 block mt-0.5">Danh mục tập thể</span>
+            </div>
+
+            <!-- Thẻ 4: ĐTQG -->
+            <div class="bg-[#0D3B1B] border border-[#166534] p-5 rounded-2xl shadow-xl relative overflow-hidden group hover:border-[#FF4500] transition-all">
+                <div class="absolute -right-4 -bottom-4 text-7xl opacity-10 font-black">🌍</div>
+                <span class="text-[10px] uppercase font-extrabold text-emerald-400 tracking-wider block">Kỷ lục ĐTQG</span>
+                <h3 id="stat-national-user" class="text-2xl font-black text-white mt-1">0</h3>
+                <span class="text-[11px] text-gray-400 block mt-0.5">Danh mục đội tuyển</span>
+            </div>
+
+        </div>
+
+        <!-- BỘ LỌC KỶ LỤC & TÌM KIẾM -->
+        <div class="bg-[#0D3B1B] border border-[#166534] p-4 rounded-2xl mb-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+                <button data-category="all" class="record-filter-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#FF4500] text-white cursor-pointer whitespace-nowrap">
+                    Tất cả kỷ lục
+                </button>
+                <button data-category="player" class="record-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#071F0E] text-gray-300 border border-[#166534] hover:border-[#FF4500] hover:text-white cursor-pointer whitespace-nowrap">
+                    👤 Kỷ lục Cầu thủ
+                </button>
+                <button data-category="club" class="record-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#071F0E] text-gray-300 border border-[#166534] hover:border-[#FF4500] hover:text-white cursor-pointer whitespace-nowrap">
+                    🛡️ Kỷ lục Câu lạc bộ
+                </button>
+                <button data-category="national" class="record-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#071F0E] text-gray-300 border border-[#166534] hover:border-[#FF4500] hover:text-white cursor-pointer whitespace-nowrap">
+                    🌍 Kỷ lục ĐTQG
+                </button>
+            </div>
+
+            <!-- Ô tìm kiếm -->
+            <div class="relative w-full md:w-72">
+                <input 
+                type="text" 
+                id="search-record-input" 
+                placeholder="Tìm tên kỷ lục, cầu thủ, CLB..." 
+                class="w-full pl-9 pr-4 py-2 bg-[#071F0E] border border-[#166534] rounded-xl text-xs text-white placeholder-gray-400 focus:outline-none focus:border-[#FF4500] transition-all">
+                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
+            </div>
+        </div>
+        <!-- BẢNG KỶ LỤC CHI TIẾT -->
+        <div class="bg-[#0D3B1B] border border-[#166534] rounded-2xl overflow-hidden shadow-2xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-[#071F0E]/90 text-gray-400 border-b border-[#166534] uppercase font-semibold text-[11px]">
+                            <th class="py-4 px-4">Tên kỷ lục</th>
+                            <th class="py-4 px-4">Chủ nhân kỷ lục</th>
+                            <th class="py-4 px-4">Câu lạc bộ</th>
+                            <th class="py-4 px-3 text-center">Thông số kỷ lục</th>
+                            <th class="py-4 px-3 text-center">Thời gian lập</th>
+                        </tr>
+                    </thead>
+                    <tbody id="records-table-body" class="divide-y divide-[#166534]/40">
+                        <!-- Javascript sẽ render kỷ lục tại đây -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modal-container"></div>
+
+    <div id="footer"></div>
+
+    <!-- Script xử lý -->
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+    <script type="module" src="../../js/userjs/Records_user.js"></script>
+</body>
+</html>

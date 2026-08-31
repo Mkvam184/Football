@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Trí & Game Bóng Đá</title>
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen font-sans antialiased selection:bg-[#FF4500] selection:text-white m-0 p-0 border-none">
+    <header class="sticky top-0 z-50">
+        <div id="navbar"></div>
+    </header>
+
+    <!-- HEADER TRANG (Khối Đen Thuần Top Bar) -->
+    <div class="w-full bg-[#080808] border-b border-white/10 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <span class="px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-widest bg-[#FF4500]/20 text-[#FF4500] border border-[#FF4500]/30 rounded-full shadow-sm">
+                    Góc Thư Giãn & Trải Nghiệm
+                </span>
+                <h1 class="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight flex items-center gap-3">
+                    <span>🎮</span> GIẢI TRÍ & GAME BÓNG ĐÁ
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">Trải nghiệm các phân khu nội dung với dải màu sắc phân biệt rõ ràng</p>
+            </div>
+
+            <!-- Indicator Đội bóng của user -->
+            <div class="bg-white/5 border border-white/10 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-lg self-start md:self-auto">
+                <span class="text-2xl">⚽</span>
+                <div>
+                    <span class="text-[10px] text-gray-400 uppercase font-semibold block tracking-wider">Đội bóng theo dõi</span>
+                    <strong id="fav-team-display" class="text-xs text-[#FF4500] font-extrabold">Đang tải...</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER - CÁC DÃY MÀU DÍNH LIỀN NHAU (NO MARGIN/NO GAP) -->
+    <main class="w-full flex flex-col m-0 p-0">
+
+        <!-- DÃY 1: KÊNH YOUTUBE - DÃY MÀU ĐỎ YOUTUBE (RED ZONE) -->
+        <section class="w-full bg-gradient-to-b from-[#3B070C] via-[#260407] to-[#1A0204] border-b border-red-500/20 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-red-400 block mb-1">Official Channels Zone</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-red-500">🔴</span> Kênh YouTube Chính Thức
+                        </h2>
+                    </div>
+                    <span class="text-xs font-bold text-red-200 bg-red-950/80 border border-red-700/50 px-4 py-1.5 rounded-full hidden sm:inline-block">
+                        Dãy Đỏ YouTube
+                    </span>
+                </div>
+
+                <div id="channels-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Javascript render Kênh Youtube -->
+                </div>
+            </div>
+        </section>
+
+        <!-- DÃY 2: ÂM NHẠC WORLD CUP - DÃY MÀU TÍM MUSIC (PURPLE ZONE) - NỐI TIẾP TRỰC TIẾP -->
+        <section class="w-full bg-gradient-to-b from-[#250942] via-[#17052C] to-[#0D021C] border-b border-purple-500/20 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-purple-300 block mb-1">Soundtracks & Music Zone</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-purple-400">🎵</span> Âm Nhạc World Cup Bất Hủ
+                        </h2>
+                    </div>
+                    <span class="text-xs font-bold text-purple-200 bg-purple-950/80 border border-purple-700/50 px-4 py-1.5 rounded-full hidden sm:inline-block">
+                        Dãy Tím Âm Nhạc
+                    </span>
+                </div>
+
+                <div id="music-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Javascript render Nhạc World Cup -->
+                </div>
+            </div>
+        </section>
+
+        <!-- DÃY 3: GAMING CENTER - DÃY MÀU XANH LỤC/DƯƠNG GAMING (CYAN-GREEN ZONE) - NỐI TIẾP TRỰC TIẾP -->
+        <section class="w-full bg-gradient-to-b from-[#063323] via-[#031C13] to-[#010D09] py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-8">
+                    <span class="text-[11px] font-black uppercase tracking-widest text-emerald-400 block mb-1">Gaming Center Zone</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                        <span>🕹️</span> Tựa Game Bóng Đá Đỉnh Cao
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- CARD EA FC -->
+                    <div class="bg-[#0D4230]/70 border border-emerald-500/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden flex flex-col justify-between hover:border-emerald-400 transition-all duration-300 group backdrop-blur-md">
+                        <div class="absolute -right-6 -bottom-6 text-9xl opacity-10 font-black text-emerald-400 select-none">FC</div>
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full">
+                                    PC / Console / Mobile
+                                </span>
+                                <span class="text-xs font-bold text-yellow-400 bg-black/60 px-3 py-1 rounded-full border border-yellow-500/30">
+                                    ⭐ 4.8 / 5.0
+                                </span>
+                            </div>
+                            <h3 class="text-3xl font-black text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                                EA Sports FC 25
+                            </h3>
+                            <p class="text-xs text-emerald-100/80 leading-relaxed mb-6">
+                                Tựa game mô phỏng bóng đá chân thực nhất thế giới. Sở hữu bản quyền hơn 19.000 cầu thủ, 700+ đội bóng và các giải đấu danh giá Châu Âu.
+                            </p>
+                        </div>
+
+                        <a href="https://www.ea.com/games/ea-sports-fc" target="_blank" rel="noopener noreferrer" 
+                           class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs rounded-2xl text-center transition-all shadow-lg flex items-center justify-center gap-2">
+                            <span>🚀</span> Trang Chủ EA FC
+                        </a>
+                    </div>
+
+                    <!-- CARD DLS -->
+                    <div class="bg-[#0B335E]/70 border border-blue-500/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden flex flex-col justify-between hover:border-blue-400 transition-all duration-300 group backdrop-blur-md">
+                        <div class="absolute -right-6 -bottom-6 text-9xl opacity-10 font-black text-blue-400 select-none">DLS</div>
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-[10px] font-black uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
+                                    iOS / Android
+                                </span>
+                                <span class="text-xs font-bold text-yellow-400 bg-black/60 px-3 py-1 rounded-full border border-yellow-500/30">
+                                    ⭐ 4.6 / 5.0
+                                </span>
+                            </div>
+                            <h3 class="text-3xl font-black text-white mb-3 group-hover:text-blue-400 transition-colors">
+                                Dream League Soccer
+                            </h3>
+                            <p class="text-xs text-blue-100/80 leading-relaxed mb-6">
+                                Tựa game bóng đá di động phổ biến toàn cầu. Tự do xây dựng đội hình trong mơ, xây dựng sân vận động và thi đấu trực tuyến.
+                            </p>
+                        </div>
+
+                        <a href="https://www.ftggames.com/" target="_blank" rel="noopener noreferrer" 
+                           class="w-full py-3.5 bg-blue-500 hover:bg-blue-400 text-black font-black text-xs rounded-2xl text-center transition-all shadow-lg flex items-center justify-center gap-2">
+                            <span>📱</span> Trang Chủ First Touch Games
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="modal-container"></div>
+
+    <div id="footer"></div>
+
+    <!-- Script xử lý -->
+    <script type="module" src="../../components/account_components.js"></script>
+    <script type="module" src="../../js/userjs/Entertainment_user.js"></script>
+    <script type="module" src="../../components/navbar_components.js"></script>
+    <script type="module" src="../../components/footer_components.js"></script>
+</body>
+</html>

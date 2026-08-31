@@ -1,0 +1,26 @@
+/* Custom Scrollbar Siêu Nét cho Toàn Bộ Trang & Khung Danh Sách */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #051C0C; /* Nền trùng màu background tối của web */
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #166534; /* Màu xanh lá chủ đạo */
+    border-radius: 8px;
+    border: 1px solid #0D3B1B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FF4500; /* Đổi sang màu cam neon rực rỡ khi di chuột vào */
+}
+
+/* Hỗ trợ chuẩn Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #166534 #051C0C;
+}
