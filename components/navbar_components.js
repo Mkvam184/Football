@@ -199,8 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetHref = 'pages/userpages/Userpage.html';
                     break;
                 case 'Tin Tức':
-                    link.href = new URL('pages/userpages/Blog_user.html', siteRoot).href;
-                    targetHref = 'pages/userpages/Blog_user.html';
+                    link.href = new URL('pages/userpages/Blog_User.html', siteRoot).href;
+                    targetHref = 'pages/userpages/Blog_User.html';
                     break;
                 case 'Giải đấu':
                     link.href = new URL('pages/userpages/Tournament.html', siteRoot).href;
