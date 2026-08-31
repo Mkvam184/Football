@@ -57,6 +57,18 @@ function formatMatchStatus(status) {
     }
 }
 
+function normalizeTeamName(value) {
+    if (!value) return '';
+    return String(value)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/fc|cf|club|football club/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
 // Helper render logo đội bóng
 function renderTeamLogo(icon, customClass = "w-6 h-6 object-contain") {
     if (!icon) return `<span class="text-xl">⚽</span>`;
@@ -351,7 +363,10 @@ async function loadFavoriteClubMatches(favoriteClub) {
             const logoMap = {};
             const teamList = Array.isArray(teams) ? teams : Object.values(teams);
             teamList.forEach(t => {
-                if (t && t.team) logoMap[t.team.toLowerCase()] = t.icon;
+                if (t && t.team) {
+                    const key = normalizeTeamName(t.team);
+                    if (key) logoMap[key] = t.icon;
+                }
             });
 
             const fixtureList = Array.isArray(rawFixtures) ? rawFixtures : Object.values(rawFixtures);
@@ -359,13 +374,15 @@ async function loadFavoriteClubMatches(favoriteClub) {
             fixtureList.forEach(f => {
                 const home = f.teamHome || f.homeTeam || '';
                 const away = f.teamAway || f.awayTeam || '';
+                const homeKey = normalizeTeamName(home);
+                const awayKey = normalizeTeamName(away);
 
                 if (home.toLowerCase().includes(favoriteClub.toLowerCase()) || away.toLowerCase().includes(favoriteClub.toLowerCase())) {
                     matchedFixtures.push({
                         ...f,
                         leagueName,
-                        homeIcon: logoMap[home.toLowerCase()] || f.homeIcon || '',
-                        awayIcon: logoMap[away.toLowerCase()] || f.awayIcon || ''
+                        homeIcon: logoMap[homeKey] || logoMap[normalizeTeamName(f.homeTeam || '')] || f.homeIcon || '',
+                        awayIcon: logoMap[awayKey] || logoMap[normalizeTeamName(f.awayTeam || '')] || f.awayIcon || ''
                     });
                 }
             });
